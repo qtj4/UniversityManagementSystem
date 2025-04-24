@@ -8,6 +8,6 @@ import java.util.List;
 public class SortByStartDate implements CourseSortingStrategy {
     @Override
     public void sort(List<Course> courses) {
-        courses.sort(Comparator.comparing(Course::getStartDate));
+        courses.sort(Comparator.comparing(Course::getStartDate, Comparator.nullsLast(Comparator.naturalOrder())));
     }
 }

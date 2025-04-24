@@ -4,11 +4,15 @@ import com.qtj4.ums.dto.CourseDTO;
 import com.qtj4.ums.model.Course;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface CourseMapper {
-    @Mapping(source = "teacher.id", target = "teacherId")
+    CourseMapper INSTANCE = Mappers.getMapper(CourseMapper.class);
+
+    @Mapping(target = "enrollments", ignore = true)
+    @Mapping(target = "teacherId", source = "teacher.id")
     CourseDTO toDto(Course course);
-    @Mapping(target = "teacher", ignore = true)
+
     Course toEntity(CourseDTO courseDTO);
 }
